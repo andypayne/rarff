@@ -1,11 +1,11 @@
-= rarff
+# rarff
 
 Rarff - Ruby ARFF Library
 
 Rarff is a Ruby library for dealing with Attribute-Relation File Format (ARFF) files. ARFF files are used to specify data sets for data mining and machine learning.
 
 
-== License
+## License
 
 Copyright (c) 2006-2012 Andy Payne
 All rights reserved.
@@ -34,7 +34,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-== Todo
+## Todo
 
 * Spaces or quotes in nominal types
 * Commas in quoted attributes or in nominal types
@@ -44,7 +44,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * Dates - do some work to create, translate, and interpret date format strings.
 
 
-== Weka
+## Weka
 
 Weka is "a collection of machine learning algorithms for data mining tasks."
 (http://www.cs.waikato.ac.nz/ml/weka/)  Weka accompanies the following book:
@@ -53,7 +53,7 @@ Ian H. Witten and Eibe Frank (2005) "Data Mining: Practical machine learning
 tools and techniques", 2nd Edition, Morgan Kaufmann, San Francisco, 2005.
 
 
-== ARFF Information
+## ARFF Information
 
 ARFF files are similar to CSV files, but are strongly-typed, have a pre-defined
 set of data types, and include a sparse representation.
@@ -61,8 +61,7 @@ set of data types, and include a sparse representation.
 Links to documentation:
 
 * http://www.cs.waikato.ac.nz/~ml/weka/arff.html
-* http://weka.sourceforge.net/wekadoc/index.php/en:ARFF_%283.4.6%29
-
+* http://sourceforge.net/projects/weka/files/
 
 
 
