@@ -2,6 +2,7 @@
 
 require 'test/unit'
 require '../lib/rarff'
+require 'csv'
 
 class TestArffLib < Test::Unit::TestCase
 
@@ -84,6 +85,36 @@ class TestArffLib < Test::Unit::TestCase
 
     assert_equal('left-weight', rel.attributes[0].name, "first attribute not as expected")
     assert_equal('class', rel.attributes[4].name, "last attribute not as expected")
+
+  end
+
+  def test_all_comments_stored
+    in_file = './test_comments_arff.arff'
+    in_comments_csv = './test_comments_raw.csv'
+
+    comments = []
+
+    CSV.open(in_comments_csv, 'r') do |row|
+      comments << Rarff::Comment.new(row[0].to_s,row[1].to_i)
+    end
+
+    rel = Rarff::Relation.new
+    in_file_contents = File.open(in_file).read
+    rel.parse(in_file_contents)
+
+    assert_equal(comments.length, rel.comments.length, "Some comments not stored or extra comments stored")
+    assert_equal(comments, rel.comments, "Comments / lines differ")
+  end
+
+  def test_input_to_output_match
+    #todo
+    #in_file = './test_comments_arff.arff'
+    #rel = Rarff::Relation.new
+    #
+    #in_file_contents = File.open(in_file).read
+    #rel.parse(in_file_contents)
+    #
+    #assert_equal(rel.to_arff, in_file_contents, "Arff input and output don't match'.")
 
   end
 end

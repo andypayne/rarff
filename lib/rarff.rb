@@ -112,15 +112,17 @@ module Rarff
 
   end
 
+  Comment = Struct.new(:text,:row)
 
   class Relation
-    attr_accessor :name, :attributes, :instances
+    attr_accessor :name, :attributes, :instances, :comments
 
 
     def initialize(name='')
       @name = name
       @attributes = Array.new
       @instances = Array.new
+      @comments = Array.new
     end
 
 
@@ -128,9 +130,9 @@ module Rarff
       in_data_section = false
 
       # TODO: Doesn't handle commas in quoted attributes.
-      str.split("\n").each { |line|
+      str.split("\n").each_with_index { |line, idx|
         next if line =~ /^\s*$/
-        next if line =~ /^\s*#{COMMENT_MARKER}/
+        next if line.my_scan(/^\s*#{COMMENT_MARKER}/) { @comments << Comment.new(line.slice(1..-1), idx+1)}
         next if line.my_scan(/^\s*#{RELATION_MARKER}\s*(.*)\s*$/i) { |name| @name = name }
         next if line.my_scan(/^\s*#{ATTRIBUTE_MARKER}\s*([^\s]*)\s+(.*)\s*$/i) { |name, type|
           @attributes.push(Attribute.new(name, type))
@@ -234,27 +236,21 @@ end # module Rarff
 
 ################################################################################
 
-if $0 == __FILE__ then
+if $0 == __FILE__
 
+  exit unless ARGV[0]
+  in_file = ARGV[0]
+  contents = ''
 
-  if ARGV[0]
-    in_file = ARGV[0]
-    contents = ''
+  contents = File.open(in_file).read
 
-    contents = File.open(in_file).read
-
-    rel = Rarff::Relation.new
-    rel.parse(contents)
-
-  else
-    exit
-  end
+  rel = Rarff::Relation.new
+  rel.parse(contents)
 
   puts '='*80
   puts '='*80
   puts "ARFF:"
   puts rel
-
 
 end
 
