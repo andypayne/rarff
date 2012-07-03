@@ -1,0 +1,21 @@
+%1. Title: Snippet of Balance Scale Weight & Distance Database
+%
+%2. Second heading:
+
+@relation balance-scale
+@attribute left-weight real
+%3. Attribute-interleaved comment
+@attribute left-distance real
+@attribute right-weight real
+@attribute right-distance real
+@attribute class { L, B, R}
+%4. attribute-data comment
+@data
+1,1,3,4,R
+%5. data-interleaved comment
+1,1,3,5,R
+%
+%6. trailing comment
+%
+%7. blank lines are kept
+%  8. leading spaces are kept
