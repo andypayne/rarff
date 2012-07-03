@@ -26,7 +26,7 @@ module Enumerable
 # TODO: Is there a better way?
 	def map_with_index
         # Ugly, but I need the yield to be the last statement in the map.
-		i = -1 
+		i = -1
 		return map { |item|
 			i += 1
 			yield item, i
@@ -168,19 +168,13 @@ class Relation
 		@instances.each_index { |i|
 			@instances[i].each_index { |j|
 				if @instances[i][j].class != String
-					if attr_pass == true
-						@attributes[j] = Attribute.new("Attr#{j}", ATTRIBUTE_NUMERIC)
-					end
+          assign_or_build_attr(j, ATTRIBUTE_NUMERIC) if attr_pass
 				elsif @instances[i][j] =~ /^\-?\d+\.?\d*$/
 					# TODO: Should I have a separate to_i conversion, or is to_f sufficient?
 					@instances[i][j] = @instances[i][j].to_f
-					if attr_pass == true
-						@attributes[j] = Attribute.new("Attr#{j}", ATTRIBUTE_NUMERIC)
-					end
+          assign_or_build_attr(j, ATTRIBUTE_NUMERIC) if attr_pass
 				else
-					if attr_pass == true
-						@attributes[j] = Attribute.new("Attr#{j}", ATTRIBUTE_STRING)
-					end
+          assign_or_build_attr(j, ATTRIBUTE_STRING) if attr_pass
 				end
 			}
 
@@ -188,6 +182,14 @@ class Relation
 		}
 	end
 
+
+  def assign_or_build_attr(j, attr_type)
+    if @attributes[j].is_a?(Attribute)
+      @attributes[j].type = attr_type
+    else
+      @attributes[j] = Attribute.new("Attr#{j}", attr_type)
+    end
+  end
 
 	def expand_sparse(str)
 		arr = Array.new(@attributes.size, 0)

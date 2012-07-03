@@ -15,6 +15,6 @@ SPEC = Gem::Specification.new do |s|
     s.autorequire         = "rarff"
     s.test_file           = "tests/ts_rarff.rb"
     s.has_rdoc            = true
-    s.extra_rdoc_files    = ["README"]
+    s.extra_rdoc_files    = %w(README.md)
 end
 
