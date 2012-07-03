@@ -1,7 +1,7 @@
 require 'rubygems'
 SPEC = Gem::Specification.new do |s|
     s.name                = "rarff"
-    s.version             = "0.1.0"
+    s.version             = "0.2.1"
     s.author              = "Andy Payne"
     s.email               = "apayne@gmail.com"
     s.homepage            = "https://github.com/andypayne/rarff"
