@@ -94,7 +94,7 @@ class TestArffLib < Test::Unit::TestCase
 
     comments = []
 
-    CSV.open(in_comments_csv, 'r') do |row|
+    CSV.foreach(in_comments_csv) do |row|
       comments << Rarff::Comment.new(row[0].to_s,row[1].to_i)
     end
 
