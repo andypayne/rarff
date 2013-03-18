@@ -84,6 +84,8 @@ module Rarff
         # Example format: "{nom1,nom2, nom3, nom4,nom5 } "
         # Split on '{'  ','  or  '}'
         @type = @type.gsub(/^\s*\{\s*/, '').gsub(/\s*\}\s*$/, '').split(/\s*\,\s*/)
+      else
+        @type_is_nominal = false
       end
     end
 

@@ -106,6 +106,15 @@ class TestArffLib < Test::Unit::TestCase
     assert_equal(comments, rel.comments, "Comments / lines differ")
   end
 
+  def test_relation_to_s
+    in_file = './test_arff.arff'
+    rel = Rarff::Relation.new
+    rel.parse(File.open(in_file).read)
+    assert_nothing_raised do
+      rel.to_s
+    end
+  end
+
   def test_input_to_output_match
     #todo
     #in_file = './test_comments_arff.arff'
